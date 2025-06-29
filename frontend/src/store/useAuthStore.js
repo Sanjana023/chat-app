@@ -92,10 +92,12 @@ connectSocket: () => {
   if(!authUser || get().socket?.connected) return;
 
   const socket = io(BASE_URL);
-  socket.connect()
+  socket.connect();
+
+  set({ socket: socket });
 },
 
 disconnectSocket: () => {
-
-}
+  if(get().socket?.connected) get().socket.disconnect();
+},
 }));
