@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import{ io } from "socket.io-client";
 
 const BASE_URL= import.meta.env.MODE === "development"  ? "http://localhost:5001/api" : "/api";
+const SOCKET_BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:5001" : "/";
 
 
 export const useAuthStore = create((set,get) => ({
@@ -91,12 +92,11 @@ connectSocket: () => {
   const {authUser} = get()
   if(!authUser || get().socket?.connected) return;
 
-  const socket = io(BASE_URL , {
-    query: {
-      userId: authUser._id,
-    }
-  });
-  socket.connect();
+   const socket = io(SOCKET_BASE_URL, {
+            query: {
+                userId: authUser._id,
+            }
+        });
 
   set({ socket: socket });
 
@@ -106,6 +106,11 @@ connectSocket: () => {
 },
 
 disconnectSocket: () => {
-  if(get().socket?.connected) get().socket.disconnect();
-},
+        const socket = get().socket;
+        if(socket?.connected) {
+            socket.disconnect();
+        }
+        
+        set({ socket: null });
+    },
 }));
