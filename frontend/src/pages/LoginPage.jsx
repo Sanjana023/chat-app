@@ -18,7 +18,6 @@ const LoginPage = () => {
     e.preventDefault();
     const success = await login(formData);
     if(success) navigate("/");
-    login(formData);
   };
 
   return (
