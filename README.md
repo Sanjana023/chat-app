@@ -59,20 +59,20 @@
 
    ```
 
-3. **Start the backend server ***
+3. **Start the backend server**
    ```bash
     cd backend
     npm run dev
 
    ```
 
-4. **Start the frontend server ***
+4. **Start the frontend server**
    ```bash
     cd frontend
     npm run dev
 
    ```
-5. *** Environment Variables ***
+5. **Environment Variables**
 Make sure to create .env files for both backend and frontend with appropriate keys such as:
 
 MONGO_URI
